@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="quizApp">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>De hoofdsteden quiz</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/stylesheets/sassstyle.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="/app/angular-route.min.js"></script>
+    <script src="/app/angularApp.js"></script>
+    <script src="/app/constants.js"></script>
+    <script src="/app/controllers.js"></script>
+    <script src="/app/services.js"></script>
 </head>
-<body>
+<body ng-controller="homeController">
+<div class="container-fluid">
+    <div class="row headerContainer">
+        <div class="row">
+                <ul class="nav-ul">
+                    <li class="nav-li" role="presentation"><a href="#/contact">Contact</a></li>
+                    <li class="nav-li" role="presentation"><a href="#/about">Info</a></li>
+                    <li class="nav-li" role="presentation"><a href="https://github.com/SimonJang/webappsV">GitHub</a></li>
+                </ul>
+        </div>
+    </div>
+    <div class="row header header-container">
+        <a id="headerA" href="#/"><h1 class="mainHeader">Hoofdsteden Quiz</h1>
+        <h3 class="mainHeader-sm">Test je kennis van de Europese hoofdsteden</h3></a>
+    </div>
+    <div class="row navBtnContainer col-xs-12 col-sm-12 col-md-9 col-md-offset-3">
+        <!--<div class="row">
+        <ul class="nav-ul">
+            <li class="nav-li" role="presentation" class="mainButtons"><a href="#">SPELEN</a></li>
+            <li class="nav-li" role="presentation" class="mainButtons"><a href="#">RANGSCHIKKING</a></li>
+            <li class="nav-li" role="presentation" class="mainButtons"><a href="#">MAAK EEN QUIZ</a></li>
+        </ul>-->
+        <button type="button" class="btn btn-outline-fill">Spelen</button>
+        <button type="button" class="btn btn-outline-fill">Rangschikking</button>
+        <button type="button" class="btn btn-outline-fill">Maak een Quiz</button>
+        <button type="button" class="btn btn-outline-fill">Profiel</button>
+    </div>
+    </div>
+    <div class="col-xs-12 col-md-6 col-md-offset-3" ng-view>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <hr />
+                <div class="col-md-8">
+                </div>
+                <div class="col-md-4">
+                    <p class="muted pull-right">© Simon Jang, OLOD Web Applicaties V</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
