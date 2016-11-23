@@ -1,0 +1,89 @@
+/* line 7, ../sass/sassstyle.scss */
+.btn {
+  padding: .66em 2.25em;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  margin-right: 0.5em;
+}
+/* line 13, ../sass/sassstyle.scss */
+.btn:after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0.125em;
+  left: 0.125em;
+  border-bottom: 0.125em solid;
+  border-right: 0.125em solid;
+}
+/* line 24, ../sass/sassstyle.scss */
+.btn:active {
+  transform: translate(0.125em, 0.125em);
+}
+/* line 26, ../sass/sassstyle.scss */
+.btn:active:after {
+  transform: translate(-0.125em, -0.125em);
+}
+/* line 30, ../sass/sassstyle.scss */
+.btn:last-child {
+  margin-right: 0em;
+}
+
+/* line 35, ../sass/sassstyle.scss */
+.btn-filled {
+  background-color: #74AFAD;
+  color: #fff;
+  transition: background-color 0.2s ease-out;
+}
+/* line 39, ../sass/sassstyle.scss */
+.btn-filled:after {
+  border-color: #74AFAD;
+  transition: border-color 0.2s ease-out;
+}
+/* line 43, ../sass/sassstyle.scss */
+.btn-filled:hover {
+  background-color: #74AFBF;
+}
+/* line 45, ../sass/sassstyle.scss */
+.btn-filled:hover:after {
+  border-color: #74AFBF;
+}
+
+/* line 51, ../sass/sassstyle.scss */
+.btn-outline {
+  color: #74AFAD;
+  box-shadow: inset 0 0 0 0.125em currentcolor;
+  transition: color 0.2s ease-out;
+}
+/* line 55, ../sass/sassstyle.scss */
+.btn-outline:after {
+  border-color: currentcolor;
+}
+/* line 58, ../sass/sassstyle.scss */
+.btn-outline:hover {
+  color: #74AFBF;
+}
+
+/* line 63, ../sass/sassstyle.scss */
+.btn-outline-fill {
+  color: #74AFAD;
+  box-shadow: inset 0 0 0 0.125em #74AFAD;
+  background-color: transparent;
+  transition: color 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out;
+}
+/* line 68, ../sass/sassstyle.scss */
+.btn-outline-fill:after {
+  border-color: #74AFAD;
+}
+/* line 71, ../sass/sassstyle.scss */
+.btn-outline-fill:hover {
+  color: #fff;
+  background-color: #74AFBF;
+  box-shadow: inset 0 0 0 0.125em transparent;
+}
+/* line 75, ../sass/sassstyle.scss */
+.btn-outline-fill:hover:after {
+  border-color: #74AFBF;
+}

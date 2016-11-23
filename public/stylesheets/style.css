@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhaina');
+@import url('https://fonts.googleapis.com/css?family=Poiret+One');
+
+a {
+    text-decoration: none;
+    color: #585858;
+}
+
+a:hover {
+    color: #ECECEA;
+    background-color: transparent;
+}
+
+.nav-ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 25%;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.nav-li {
+    float: left;
+}
+
+.mainButtons {
+    font-family: 'Baloo Bhaina';
+    font-size: 24px;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.mainPanel {
+    margin-top: 2em;
+    margin-bottom: 5em;
+}
+
+.panel > .panel-heading {
+    background-image: none;
+    background-color: #74AFAD;
+    color: white;
+}
+
+.panel {
+    background-color: #ECECEA;
+}
+
+body {
+    background-color: #ECECEA;
+}
+
+.header > a {
+     color: black;
+     text-decoration: none;
+}
+
+.header > a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+
+.header-container {
+    padding-top: 6em;
+    padding-bottom: 6em;
+}
+
+.navBtnContainer {
+    margin-top: 2em;
+}
+
+.mainHeader {
+    font-family:'Baloo Bhaina';
+    font-size: 56px;
+    text-align: center;
+}
+
+
+.mainHeader-sm {
+    font-family: 'Baloo Bhaina';
+    font-size: 28px;
+    padding-left: 40%
+}
+
+.panel-body > p > a {
+    color: #74AFAD;
+    text-decoration: none;
+}
+
+.panel-body > p > a:hover {
+    color: black;
+}
+
+

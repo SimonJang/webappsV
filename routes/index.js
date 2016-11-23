@@ -97,12 +97,6 @@ router.post('/login', function(req, res, next) {
       return res.status(401).json(info);
     }
   })(req,res,next)
-})
-
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
 });
 
 // Configureren van Router POSTing
