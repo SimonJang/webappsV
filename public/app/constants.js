@@ -1,3 +1,10 @@
 /**
- * Created by simonjang on 22/11/16.
+ * Configuratie van de REST routes
  */
+
+(function() {
+    angular.module('quizApp')
+        .constant('GLOBALS', {
+            alleLandenURL: 'http://localhost:3000/api/landen'
+        })
+})();

@@ -13,21 +13,32 @@
             templateUrl: 'html/homeView.html',
             controller: 'homeController',
             controllerAs: 'homeCtrl'
-        })
+            })
             .when('/contact', {
                 templateUrl: 'html/contactView.html',
-                controller: 'contactController',
-                controllerAs: 'contactCtrl'
+                controller: 'homeController',
+                controllerAs: 'homeCtrl'
             })
             .when ('/about', {
                 templateUrl: 'html/aboutView.html',
-                controller: 'aboutController',
-                controllerAs: 'aboutCtrl'
+                controller: 'homeController',
+                controllerAs: 'homeCtrl'
             })
             .when('/spelen', {
-                templateUrl: 'html/spelOverzicht',
+                templateUrl: 'html/spelOverzicht.html',
                 controller: 'spelController',
-                controllerAs: 'spelController'
+                controllerAs: 'spelCtrl'
             })
+            .when('/spelen/reeks', {
+                templateUrl: 'html/spelReeksConfig.html',
+                controller: 'spelController',
+                controllerAs: 'spelCtrl'
+            })
+            .when('/spelen/reeks/:id', {
+                templateUrl: 'html/spelReeks.html',
+                controller: 'reeksController',
+                controllerAs: 'reeksCtrl'
+            })
+
     }
 })();

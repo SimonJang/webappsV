@@ -22,6 +22,7 @@ a:hover {
 .nav-li {
     float: left;
 }
+button:focus {outline:0;}
 
 .mainButtons {
     font-family: 'Baloo Bhaina';
@@ -38,7 +39,7 @@ li a {
 
 .mainPanel {
     margin-top: 2em;
-    margin-bottom: 5em;
+    margin-bottom: 2em;
 }
 
 .panel > .panel-heading {
@@ -65,6 +66,11 @@ body {
     text-decoration: none;
 }
 
+.btnContainer {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
 
 .header-container {
     padding-top: 6em;
@@ -73,6 +79,7 @@ body {
 
 .navBtnContainer {
     margin-top: 2em;
+    text-align:center;
 }
 
 .mainHeader {
@@ -97,4 +104,14 @@ body {
     color: black;
 }
 
+.footer-custom {
+    font-size: 10px;
+}
 
+.selectionHeading {
+    height: 4em;
+    width: 100%;
+    text-align:center;
+    margin-bottom: 1em;
+    font-family: 'Baloo Bhaina';
+}

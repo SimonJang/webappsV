@@ -13,30 +13,29 @@
     <script src="/app/constants.js"></script>
     <script src="/app/controllers.js"></script>
     <script src="/app/services.js"></script>
+    <script src="/app/factory.js"></script>
 </head>
-<body ng-controller="homeController">
+<body ng-controller="homeController as homeCtrl">
 <div class="container-fluid">
     <div class="row headerContainer">
-        <div class="row">
                 <ul class="nav-ul">
                     <li class="nav-li" role="presentation"><a href="#/contact">Contact</a></li>
                     <li class="nav-li" role="presentation"><a href="#/about">Info</a></li>
                     <li class="nav-li" role="presentation"><a href="https://github.com/SimonJang/webappsV">GitHub</a></li>
                 </ul>
-        </div>
     </div>
     <div class="row header header-container">
         <a id="headerA" href="#/"><h1 class="mainHeader">Hoofdsteden Quiz</h1>
         <h3 class="mainHeader-sm">Test je kennis van de Europese hoofdsteden</h3></a>
     </div>
-    <div class="row navBtnContainer col-xs-12 col-sm-12 col-md-9 col-md-offset-3">
+    <div class="row navBtnContainer col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
         <!--<div class="row">
         <ul class="nav-ul">
             <li class="nav-li" role="presentation" class="mainButtons"><a href="#">SPELEN</a></li>
             <li class="nav-li" role="presentation" class="mainButtons"><a href="#">RANGSCHIKKING</a></li>
             <li class="nav-li" role="presentation" class="mainButtons"><a href="#">MAAK EEN QUIZ</a></li>
         </ul>-->
-        <button type="button" class="btn btn-outline-fill">Spelen</button>
+        <button type="button" class="btn btn-outline-fill" ng-click="homeCtrl.onSpelen()">Spelen</button>
         <button type="button" class="btn btn-outline-fill">Rangschikking</button>
         <button type="button" class="btn btn-outline-fill">Maak een Quiz</button>
         <button type="button" class="btn btn-outline-fill">Profiel</button>
@@ -44,14 +43,12 @@
     </div>
     <div class="col-xs-12 col-md-6 col-md-offset-3" ng-view>
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 <hr />
-                <div class="col-md-8">
-                </div>
-                <div class="col-md-4">
-                    <p class="muted pull-right">© Simon Jang, OLOD Web Applicaties V</p>
+                <div class="col-md-4 col-md-offset-6">
+                    <p class="muted pull-right footer-custom">© Simon Jang, Bachelor in Toegepaste Informatica, OLOD Web Applicaties V</p>
                 </div>
             </div>
         </div>
