@@ -39,6 +39,11 @@
                 controller: 'reeksController',
                 controllerAs: 'reeksCtrl'
             })
+            .when('/landen', {
+                templateUrl: 'html/landen.html',
+                controller: 'landenController',
+                controllerAs: 'landenCtrl'
+            });
 
     }
 })();

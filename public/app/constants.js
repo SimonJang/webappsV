@@ -5,6 +5,7 @@
 (function() {
     angular.module('quizApp')
         .constant('GLOBALS', {
-            alleLandenURL: 'http://localhost:3000/api/landen'
+            alleLandenURL: 'http://localhost:3000/api/landen',
+            reeksURL: 'http://localhost:3000/api/reeks/'
         })
 })();

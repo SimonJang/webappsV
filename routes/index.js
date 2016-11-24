@@ -16,18 +16,15 @@ router.get('/api', function(req, res) {
 
 // GET - landen (allemaal)
 router.get('/api/landen', function(req, res, next) {
-  Land.find(function(err,landen) {
+  Land.find({}).sort({land: 1}).exec(function(err,landen) {
     if(err) {
       return next(err);
     }
     console.log('Landen worden opgevraagd');
-    res.json(landen);
+    var rlanden = landen
+    console.log('Landen worden gesorteerd');
+    res.json(rlanden);
   })
-});
-
-// GET - landen (specifiek)
-router.get('/api/landen/:land', function(req,res) {
-  res.json(req.land);
 });
 
 // POST - land
@@ -41,6 +38,41 @@ router.post('/api/landen', function(req,res,next) {
   })
 });
 
+// GET - reeks (een willekeurige reeks van hoofdsteden)
+
+router.get('/api/reeks/:id' , function(req,res) {
+  var landen = {};
+  landen = Land.find({},function(err,landen) {
+    if(err) {
+      return next(err);
+    }
+
+    var limiter = req.params.id;
+    var responseArray = [];
+    var options = [];
+
+    while(responseArray.length < limiter) {
+      var randomCountry = Math.floor((Math.random() * landen.length));
+      responseArray.push(landen[randomCountry]);
+      landen.splice(randomCountry, 1);
+
+      while (options.length < 2) {
+        responseArray[responseArray.length - 1].options = {}
+        var randomCapitals = Math.floor((Math.random() * landen.length));
+        if(options.indexOf(landen[randomCapitals].hoofdstad) == -1) {
+          options.push(landen[randomCapitals].hoofdstad);
+        }
+      }
+      responseArray[responseArray.length - 1].options = options;
+      options = [];
+    }
+    res.json(responseArray);
+  });
+
+});
+
+// GET alle quizes - quiz
+
 router.get('/api/quiz', function(req,res,next) {
   Quiz.find(function(err,quizs) {
     if(err) {
@@ -51,6 +83,17 @@ router.get('/api/quiz', function(req,res,next) {
   })
 });
 
+// GET specifieke - quiz
+
+router.get('api/quiz/:id', function(req,res) {
+  Quiz.findOne({'id': id}, function(err, quiz) {
+    if(err) {console.log(err)}
+    res.json(quiz);
+  })
+});
+
+// POST custom quiz
+
 router.post('/api/quiz', function(req,res, next) {
   var quiz = new Quiz(req.body);
   quiz.save(function(err,quiz) {
@@ -58,6 +101,16 @@ router.post('/api/quiz', function(req,res, next) {
       return next(err);
     }
     res.json(quiz);
+  })
+});
+
+// GET - specifieke quiz
+
+router.get('/api/quiz/:id', function(req,res) {
+  var searchID = req.id
+  Quiz.findOne({'id': searchID}, function(err, quiz) {
+    if(err) {console.log(err)};
+    res.json(quiz)
   })
 });
 
@@ -112,5 +165,6 @@ router.param('post', function(req,res,next,id) {
     return next();
   })
 });
+
 
 module.exports = router;

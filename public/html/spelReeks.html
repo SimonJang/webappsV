@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Reeks</title>
+    <title>Een reeks</title>
 </head>
 <body>
 <div class="panel panel-default mainPanel">
@@ -10,7 +10,29 @@
         <h3 class="panel-title">Reeks</h3>
     </div>
     <div class="panel-body">
+        <form ng-if="showForm" class="animate-if">
+            <div class="form-group" ng-repeat="rij in reeksCtrl.reeks">
+                <label>{{rij.land}}</label>
+                    <input type="text" required ng-model="rij.keuze" class="form-control" />
+            </div>
 
+    <div class="btnContainer">
+        <button type="submit" ng-click="reeksCtrl.controleer()" class="btn btn-outline-fill">Controleer</button>
+    </div>
+    </form>
+        <div ng-if="showResult">
+            <h4>Uitslag</h4>
+            <p>
+                <b>Correct:</b> {{uitslag.juist}}
+            </p>
+            <p>
+                <b>Fout:</b> {{uitslag.fout}}
+            </p>
+            <div class="btnContainer">
+                <button ng-click="reeksCtrl.reeksCfg()" class="btn btn-outline-fill">Overzicht reeksen</button>
+                <button ng-click="reeksCtrl.nieuwSpel()" class="btn btn-outline-fill">Speel opnieuw</button>
+            </div>
+        </div>
     </div>
 </div>
 </body>

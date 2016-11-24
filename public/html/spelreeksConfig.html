@@ -27,7 +27,8 @@
                     ng-change="spelCtrl.update(keuze)">
                 </select>
             </div>
-            <div class="col-xs-4">
+        </form>
+            <div class="container-fluid col-xs-4 col-sm-4 col-md-4 col-lg-4 selectionContainer">
                 <h4 class="selectionHeading">Jouw eigen reeks!</h4>
             <div class="container-circle">
                 <a ng-href="#/spelen/reeks/{{selectedOption.id}}">
@@ -36,25 +37,24 @@
                 </a>
             </div>
             </div>
-            <div class="col-xs-4">
+            <div class="container-fluid col-xs-4 col-sm-4 col-md-4 col-lg-4 selectionContainer">
                 <h4 class="selectionHeading">De ultimate challenge!</h4>
             <div style="background-color:#f48342;" class="container-circle">
-                <a href="#">
+                <a ng-href="#/spelen/reeks/47">
                     <div class="overlay"></div>
                     <span>De ultieme challenge</span>
                 </a>
             </div>
             </div>
-            <div class="col-xs-4">
+            <div class="container-fluid col-xs-4 col-sm-4 col-md-4 col-lg-4 selectionContainer">
                 <h4 class="selectionHeading">Ik heb geen tijd!</h4>
             <div style="background-color:#42c5f4;" class="container-circle">
-                <a href="#">
+                <a ng-href="#/spelen/reeks/10">
                     <div class="overlay"></div>
                     <span>SNELLER!</span>
                 </a>
             </div>
             </div>
-        </form>
     </div>
 </div>
 </body>

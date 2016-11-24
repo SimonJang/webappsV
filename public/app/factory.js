@@ -1,5 +1,6 @@
 /**
  * Factory
+ * Wordt momenteel niet gebruikt
  */
 
 (function() {
