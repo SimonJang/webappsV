@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-
+var jwt = require('express-jwt');
 var mongoose = require('mongoose');
 var Land = mongoose.model('Land');
 var Quiz = mongoose.model('Quiz');
@@ -117,8 +117,8 @@ router.get('/api/quiz/:id', function(req,res) {
 
 // User: nieuwe user (POST)
 
-router.post('/register', function(req,res,next) {
-  if(!req.body.username || req.body.password) {
+router.post('/api/registreer', function(req,res,next) {
+  if(!req.body.username || !req.body.password) {
     return res.status(400).json({message:'Gelieve alle velden in te vullen'});
   }
 
@@ -135,7 +135,7 @@ router.post('/register', function(req,res,next) {
 
 // User: bestaande user (login - POST)
 
-router.post('/login', function(req, res, next) {
+router.post('/api/login', function(req, res, next) {
   if(!req.body.username || !req.body.password) {
     return res.status(400).json({message: 'Gelieve alle velden in te vullen'});
   }
@@ -152,6 +152,10 @@ router.post('/login', function(req, res, next) {
   })(req,res,next)
 });
 
+// Middleware voor auth
+
+var auth = jwt({secret: 'SECRET', userProperty:'payload'});
+
 // Configureren van Router POSTing
 
 router.param('post', function(req,res,next,id) {
@@ -165,6 +169,5 @@ router.param('post', function(req,res,next,id) {
     return next();
   })
 });
-
 
 module.exports = router;

@@ -6,17 +6,49 @@
     angular
         .module('quizApp')
         .controller('homeController', homeController)
+        .controller('navController', navController)
+        .controller('authController', authController)
         .controller('landenController', landenController)
         .controller('spelController', spelController)
         .controller('reeksController', reeksController);
-    
-    homeController.$inject = ['$scope', '$location'];
 
-    function homeController($scope, $location) {
+    authController.$inject = ['$scope', '$state', 'authFactory'];
+
+    function authController($scope, $state, authFactory) {
+        $scope.user = {};
+
+        $scope.register = function() {
+            authFactory.register($scope.user).error(function(error) {
+                $scope.error = true;
+            }).then(function() {
+                $state.go('home');
+            });
+        };
+
+        $scope.logIn = function() {
+            authFactory.logIn($scope.user).error(function(error) {
+                $scope.error = true;
+            }).then(function() {
+                $state.go('home');
+            })
+        }
+    }
+
+    navController.$inject = ['$scope', 'authFactory'];
+
+    function navController($scope, authFactory) {
+        $scope.isLoggedIn = authFactory.isLoggedIn;
+        $scope.currentUser = authFactory.currentUser;
+        $scope.logOut = authFactory.logOut;
+    }
+    
+    homeController.$inject = ['$scope', '$state'];
+
+    function homeController($scope, $state) {
         var vm = this;
 
         vm.onSpelen = function() {
-            $location.path('/spelen/');
+            $state.go('spelen');
         }
     }
 

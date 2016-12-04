@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registreren</title>
+</head>
+<body>
+<div class="panel panel-default mainPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Registratie nieuwe gebruiker</h3>
+    </div>
+    <div class="panel-body">
+        <form>
+            <div class="form-group">
+                <label for="username">Gebruikersnaam</label>
+                <input ng-model="user.username" type="text" class="form-control" id="username" placeholder="Gebruiker"/>
+            </div>
+            <div class="form-group">
+                <label for="password">Paswoord</label>
+                <input ng-model="user.password" type="password" class="form-control" id="password" placeholder="Paswoord">
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="register()">Registreer</button>
+        </form>
+    </div>
+</div>
+</div>
+</body>
+</html>

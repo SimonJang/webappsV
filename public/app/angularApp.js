@@ -3,47 +3,84 @@
  */
 
 (function () {
-    angular.module('quizApp', ['ngRoute']).config(moduleConfig);
+    angular.module('quizApp', ['ui.router']).config(moduleConfig);
 
-    moduleConfig.$inject = ['$routeProvider'];
+    moduleConfig.$inject = ['$stateProvider','$urlRouterProvider'];
 
-    function moduleConfig($routeProvider) {
-        $routeProvider
-            .when('/', {
+    function moduleConfig($stateProvider, $urlRouterProvider) {
+        $stateProvider
+            .state('/', {
+            url: '/',
             templateUrl: 'html/homeView.html',
             controller: 'homeController',
             controllerAs: 'homeCtrl'
             })
-            .when('/contact', {
+            .state('home', {
+                url: '/home',
+                templateUrl: 'html/homeView.html',
+                controller: 'homeController',
+                controllerAs: 'homeCtrl'
+            })
+            .state('login', {
+                url: '/login',
+                templateUrl: 'html/login.html',
+                controller: 'authController',
+                controllerAs: 'authCtrl',
+                onEnter: ['$state', 'authFactory', function($state, authFactory) {
+                    if(authFactory.isLoggedIn()) {
+                        $state.go('home');
+                    }
+                }]
+            })
+            .state('registreer', {
+                url: '/registreer',
+                templateUrl: 'html/register.html',
+                controller: 'authController',
+                controllerAs: 'authCtrl',
+                onEnter: ['$state', 'authFactory', function($state, authFactory) {
+                    if(authFactory.isLoggedIn()) {
+                        $state.go('home');
+                    }
+                }]
+            })
+            .state('contact', {
+                url: '/contact',
                 templateUrl: 'html/contactView.html',
                 controller: 'homeController',
                 controllerAs: 'homeCtrl'
             })
-            .when ('/about', {
+            .state ('about', {
+                url: '/about',
                 templateUrl: 'html/aboutView.html',
                 controller: 'homeController',
                 controllerAs: 'homeCtrl'
             })
-            .when('/spelen', {
+            .state('spelen', {
+                url: '/spelen',
                 templateUrl: 'html/spelOverzicht.html',
                 controller: 'spelController',
                 controllerAs: 'spelCtrl'
             })
-            .when('/spelen/reeks', {
+            .state('spelenReeks', {
+                url: '/spelen/reeks',
                 templateUrl: 'html/spelReeksConfig.html',
                 controller: 'spelController',
                 controllerAs: 'spelCtrl'
             })
-            .when('/spelen/reeks/:id', {
+            .state('spelenReeksId', {
+                url: '/spelen/reeks/:id',
                 templateUrl: 'html/spelReeks.html',
                 controller: 'reeksController',
                 controllerAs: 'reeksCtrl'
             })
-            .when('/landen', {
+            .state('landen', {
+                url: '/landen',
                 templateUrl: 'html/landen.html',
                 controller: 'landenController',
                 controllerAs: 'landenCtrl'
             });
+
+        $urlRouterProvider.otherwise('home')
 
     }
 })();
