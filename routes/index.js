@@ -73,9 +73,10 @@ router.get('/api/reeks/:id' , function(req,res) {
 
 // GET alle quizes - quiz
 
-router.get('/api/quiz', function(req,res,next) {
-  Quiz.find(function(err,quizs) {
+router.get('/api/quiz/', function(req,res,next) {
+  Quiz.find({}, function(err,quizs) {
     if(err) {
+      console.log(err)
       return next(err)
     }
     console.log('Quizes worden opgevraagd');
@@ -83,16 +84,7 @@ router.get('/api/quiz', function(req,res,next) {
   })
 });
 
-// GET specifieke - quiz
-
-router.get('api/quiz/:id', function(req,res) {
-  Quiz.findOne({'id': id}, function(err, quiz) {
-    if(err) {console.log(err)}
-    res.json(quiz);
-  })
-});
-
-// POST custom quiz
+// POST custom quiz // TODO nice to have
 
 router.post('/api/quiz', function(req,res, next) {
   var quiz = new Quiz(req.body);

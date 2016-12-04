@@ -55,12 +55,6 @@
                 controller: 'homeController',
                 controllerAs: 'homeCtrl'
             })
-            .state('spelen', {
-                url: '/spelen',
-                templateUrl: 'html/spelOverzicht.html',
-                controller: 'spelController',
-                controllerAs: 'spelCtrl'
-            })
             .state('spelenReeks', {
                 url: '/spelen/reeks',
                 templateUrl: 'html/spelReeksConfig.html',
@@ -72,6 +66,18 @@
                 templateUrl: 'html/spelReeks.html',
                 controller: 'reeksController',
                 controllerAs: 'reeksCtrl'
+            })
+            .state('spelenQuiz', {
+                url: '/spelen/quiz',
+                templateUrl: 'html/quizConfig.html',
+                controller: 'quizController',
+                controllerAs: 'quizCtrl'
+            })
+            .state('SpelenQuizId', {
+                url:'/spelen/quiz/:id',
+                templateUrl: 'html/quiz.html',
+                controller: 'quizController',
+                controllerAs: 'quizCtrl'
             })
             .state('landen', {
                 url: '/landen',

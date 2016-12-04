@@ -6,6 +6,7 @@
     angular
         .module('quizApp')
         .controller('homeController', homeController)
+        .controller('quizController', quizController)
         .controller('navController', navController)
         .controller('authController', authController)
         .controller('landenController', landenController)
@@ -49,7 +50,15 @@
 
         vm.onSpelen = function() {
             $state.go('spelen');
-        }
+        };
+
+        vm.onSpeelReeks = function() {
+            $state.go('spelenReeks');
+        };
+
+        vm.onSpeelQuiz = function() {
+            $state.go('spelenQuiz');
+        };
     }
 
     landenController.$inject = ['$scope','GLOBALS','landenService'];
@@ -73,24 +82,20 @@
         $scope.selectedOption = vm.keuzes[0];
         vm.keuze = $scope.selectedOption.id;
 
-        vm.onSpeelReeks = function() {
-            $location.path('/spelen/reeks');
-        };
-
-        vm.onSpeelQuiz = function() {
-            $location.path('/spelen/quiz');
-        };
-
-        vm.onStartReeks = function() {
-            
-        }
     }
 
-    reeksController.$inject = ['$scope', '$location','$routeParams','reeksService', 'GLOBALS','landenService'];
+    quizController.$inject = ['$scope', '$state', '$stateParams', 'quizService', 'GLOBALS'];
 
-    function reeksController($scope, $location, $routeParams, reeksService, GLOBALS) {
+    function quizController($scope, $state, $stateParams, quizService, GLOBALS) {
         var vm = this;
-        vm.aantal = $routeParams.id;
+        
+    }
+
+    reeksController.$inject = ['$scope', '$location','$stateParams','reeksService', 'GLOBALS','landenService'];
+
+    function reeksController($scope, $location, $stateParams, reeksService, GLOBALS) {
+        var vm = this;
+        vm.aantal = $stateParams.id;
         $scope.reeks = [];
         vm.opties = [];
         $scope.showForm = true;

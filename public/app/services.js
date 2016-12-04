@@ -5,6 +5,7 @@
 (function() {
     angular.module('quizApp')
         .service('landenService', landenService)
+        .service('quizService', quizService)
         .service('reeksService', reeksService);
     
     landenService.$inject = ['$http','$q'];
@@ -44,6 +45,37 @@
             return deferred.promise;
         };
         
+        return service;
+    }
+
+    quizService.$inject = ['$http', '$q', 'GLOBALS'];
+
+    function quizService($http, $q, GLOBALS) {
+        var service = {};
+        service.temp = {};
+        
+        service.geefQuizes = function() {
+            $http({
+                url: GLOBALS.quizUrl(),
+                method: 'GET'
+            })
+                .success(function(data) {
+                    deferred.resolve(data)
+                });
+            return deferred.promise;
+        };
+
+        service.geefQuiz = function(id) {
+            $http({
+                url: GLOBALS.quizUrl + id,
+                method: 'GET'
+            })
+                .success(function(data) {
+                    deferred.resolve(data);
+                })
+            return deferred.promise;
+        };
+
         return service;
     }
 
