@@ -63,7 +63,7 @@
             })
             .state('spelenReeksId', {
                 url: '/spelen/reeks/:id',
-                templateUrl: 'html/spelReeks.html',
+                templateUrl: 'html/spel.html',
                 controller: 'reeksController',
                 controllerAs: 'reeksCtrl'
             })
@@ -75,7 +75,7 @@
             })
             .state('SpelenQuizId', {
                 url:'/spelen/quiz/:id',
-                templateUrl: 'html/quiz.html',
+                templateUrl: 'html/spel.html',
                 controller: 'quizController',
                 controllerAs: 'quizCtrl'
             })

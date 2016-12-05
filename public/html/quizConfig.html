@@ -11,6 +11,22 @@
     </div>
     <div class="panel-body">
         <p>Selecteer een quiz uit onderstaande lijst en begin te spelen!</p>
+        <div class="table-responsive">
+        <table class="table table-condensed">
+            <tr>
+                <th>Naam Quiz</th>
+                <th>Omschrijving</th>
+                <th>Aantal landen</th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="quiz in quizCtrl.quizes">
+                <td>{{quiz.naam}}</td>
+                <td>{{quiz.Omschrijving}}</td>
+                <td>{{quiz.landen.length}}</td>
+                <td><button class="btn btn-outline-fill" ng-click="quizCtrl.startQuiz(quiz.id)">Speel!</button></td>
+            </tr>
+        </table>
+        </div>
     </div>
 </div>
 </body>

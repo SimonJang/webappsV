@@ -55,8 +55,9 @@
         service.temp = {};
         
         service.geefQuizes = function() {
+            var deferred = $q.defer();
             $http({
-                url: GLOBALS.quizUrl(),
+                url: GLOBALS.quizUrl,
                 method: 'GET'
             })
                 .success(function(data) {
@@ -72,7 +73,7 @@
             })
                 .success(function(data) {
                     deferred.resolve(data);
-                })
+                });
             return deferred.promise;
         };
 

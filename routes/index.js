@@ -74,7 +74,7 @@ router.get('/api/reeks/:id' , function(req,res) {
 // GET alle quizes - quiz
 
 router.get('/api/quiz/', function(req,res,next) {
-  Quiz.find({}, function(err,quizs) {
+  Quiz.find({}, null,{sort:{'id': 1}} ,function(err,quizs) {
     if(err) {
       console.log(err)
       return next(err)

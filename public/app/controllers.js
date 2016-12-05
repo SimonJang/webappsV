@@ -61,9 +61,9 @@
         };
     }
 
-    landenController.$inject = ['$scope','GLOBALS','landenService'];
+    landenController.$inject = ['GLOBALS','landenService'];
 
-    function landenController($scope,GLOBALS,landenService) {
+    function landenController(GLOBALS,landenService) {
         var vm = this;
         vm.landen = {};
         landenService.getAlleLanden(GLOBALS)
@@ -84,17 +84,76 @@
 
     }
 
-    quizController.$inject = ['$scope', '$state', '$stateParams', 'quizService', 'GLOBALS'];
+    quizController.$inject = ['$scope','quizService', '$location', '$stateParams'];
 
-    function quizController($scope, $state, $stateParams, quizService, GLOBALS) {
+    function quizController($scope, quizService, $location, $stateParams) {
         var vm = this;
-        
+        $scope.isQuiz = true;
+        $scope.showForm = true;
+        $scope.showResult = false;
+        vm.quizes = [];
+        vm.tag = {}
+        quizService.geefQuizes()
+            .then(function(quizs, err) {
+                if(err) {
+                    console.log(err);
+                }
+                vm.quizes = quizs;
+                if( typeof $stateParams.id !== 'undefined') {
+                    var quiz = quizs[$stateParams.id - 1];
+                    vm.quiz = quiz.landen;
+                }
+            });
+
+        vm.startQuiz = function(tag) {
+            vm.tag = tag;
+            $location.path('/spelen/quiz/' + tag);
+        };
+
+        vm.controleer = function() {
+            $scope.uitslag = {};
+            $scope.uitslag.juist = 0;
+            $scope.uitslag.fout = 0;
+            for(var x = 0; x < vm.quiz.length; x++) {
+                if(vm.quiz[x].keuze.toLowerCase() !== vm.quiz[x].hoofdstad.toLowerCase()) {
+                    $scope.uitslag.fout += 1;
+                }
+                else
+                    $scope.uitslag.juist += 1;
+            }
+            $scope.showForm = false;
+            $scope.showResult = true;
+        };
+
+        vm.reset = function() {
+            vm.quiz = [];
+            $scope.showForm = true;
+            $scope.showResult = false;
+
+            quizService.geefQuizes()
+                .then(function(quizs, err) {
+                    if(err) {
+                        console.log(err);
+                    }
+                    vm.quizes = quizs;
+                    if( $stateParams.id !== null || typeof $stateParams.id != 'undefined') {
+                        var quiz = quizs[$stateParams.id - 1];
+                        vm.quiz = quiz.landen;
+                    }
+                });
+        };
+
+        vm.nieuwSpel = function() {
+            vm.reset();
+            $location.path('/spelen/quiz/' + $stateParams.id);
+        }
     }
 
     reeksController.$inject = ['$scope', '$location','$stateParams','reeksService', 'GLOBALS','landenService'];
 
     function reeksController($scope, $location, $stateParams, reeksService, GLOBALS) {
         var vm = this;
+        $scope.isReeks = true;
         vm.aantal = $stateParams.id;
         $scope.reeks = [];
         vm.opties = [];

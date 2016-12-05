@@ -5,7 +5,7 @@
     <title>Een reeks</title>
 </head>
 <body>
-<div class="panel panel-default mainPanel">
+<div ng-show=isReeks class="panel panel-default mainPanel">
     <div class="panel-heading">
         <h3 class="panel-title">Reeks</h3>
     </div>
@@ -31,6 +31,35 @@
             <div class="btnContainer">
                 <button ng-click="reeksCtrl.reeksCfg()" class="btn btn-outline-fill">Overzicht reeksen</button>
                 <button ng-click="reeksCtrl.nieuwSpel()" class="btn btn-outline-fill">Speel opnieuw</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-show=isQuiz class="panel panel-default mainPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Quiz</h3>
+    </div>
+    <div class="panel-body">
+        <form ng-if="showForm" class="animate-if">
+            <div class="form-group" ng-repeat="land in quizCtrl.quiz">
+                <label>{{land.land}}</label>
+                <input type="text" required ng-model="land.keuze" class="form-control" />
+            </div>
+
+            <div class="btnContainer">
+                <button type="submit" ng-click="quizCtrl.controleer()" class="btn btn-outline-fill">Controleer</button>
+            </div>
+        </form>
+        <div ng-if="showResult">
+            <h4>Uitslag</h4>
+            <p>
+                <b>Correct:</b> {{uitslag.juist}}
+            </p>
+            <p>
+                <b>Fout:</b> {{uitslag.fout}}
+            </p>
+            <div class="btnContainer">
+                <button ng-click="quizCtrl.nieuwSpel()" class="btn btn-outline-fill">Speel opnieuw</button>
             </div>
         </div>
     </div>
