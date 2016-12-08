@@ -75,6 +75,10 @@ html {
     margin-bottom: 1em;
 }
 
+.directiveWarning {
+    margin-top: 2em;
+}
+
 
 .header-container {
     padding-top: 6em;

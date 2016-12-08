@@ -14,6 +14,7 @@
     <script src="/app/controllers.js"></script>
     <script src="/app/services.js"></script>
     <script src="/app/factory.js"></script>
+    <script src="/app/directive.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -34,12 +35,6 @@
         <h3 class="mainHeader-sm">Test je kennis van de Europese hoofdsteden</h3></a>
     </div>
     <div class="row navBtnContainer col-xs-12 col-sm-12 col-md-8 col-md-offset-2" ng-controller="homeController as homeCtrl">
-        <!--<div class="row">
-        <ul class="nav-ul">
-            <li class="nav-li" role="presentation" class="mainButtons"><a href="#">SPELEN</a></li>
-            <li class="nav-li" role="presentation" class="mainButtons"><a href="#">RANGSCHIKKING</a></li>
-            <li class="nav-li" role="presentation" class="mainButtons"><a href="#">MAAK EEN QUIZ</a></li>
-        </ul>-->
         <button type="button" class="btn btn-outline-fill" ng-click="homeCtrl.onSpeelReeks()">Speel een reeks</button>
         <button type="button" class="btn btn-outline-fill" ng-click="homeCtrl.onSpeelQuiz()">Speel een quiz</button>
         <button type="button" class="btn btn-outline-fill">Rangschikking</button>

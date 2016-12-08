@@ -16,14 +16,27 @@
     authController.$inject = ['$scope', '$state', 'authFactory'];
 
     function authController($scope, $state, authFactory) {
+        var vm = this;
         $scope.user = {};
+        vm.warning = false;
 
         $scope.register = function() {
-            authFactory.register($scope.user).error(function(error) {
-                $scope.error = true;
-            }).then(function() {
-                $state.go('home');
-            });
+            var letterNumbersOnly = /^[0-9a-zA-Z]+$/;
+            var flagUser = $scope.user.username.match(letterNumbersOnly);
+            var flagPass = $scope.user.password.match(letterNumbersOnly);
+            if(flagUser && flagPass) {
+                authFactory.register($scope.user).error(function(error) {
+                    $scope.error = true;
+                }).then(function() {
+                    $state.go('home');
+                });
+            }
+            else {
+                $scope.user.username = null;
+                $scope.user.password = null;
+                vm.warning = true;
+            }
+
         };
 
         $scope.logIn = function() {
