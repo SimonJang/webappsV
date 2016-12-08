@@ -1,3 +1,5 @@
+De webapplicatie bestaat uit een landenquiz waarbij de hoofdstad moet worden ingevuld! Je krijgt een score te zien na het spelen. Andere features zoals scorebord zijn nog TODO voor de deadline van 16/12
+
 Om te voldoen aan de minimum requirements die opgelegd zijn voor deze opdracht, bevat de applicatie momenteel huidige onderdelen:
             <ul>
                 <li>Angular front end</li>
