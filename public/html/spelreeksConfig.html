@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Configuratie van de spelreeks</title>
+</head>
+<body>
+<div class="panel panel-default mainPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Een reeks</h3>
+    </div>
+    <div class="panel-body">
+        <p>Je kan kiezen hoe lang jouw reeks is. Geen zin om te configureren? Ga voor de <span style="color:#42c5f4;">snelle start</span> of de <span style="color:#f48342;" >ultimate challenge</span></p>
+    </div>
+</div>
+<div class="panel panel-default mainPanel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Kies jouw reeks!</h3>
+    </div>
+    <div class="panel-body">
+        <form>
+            <div class="form-group">
+                <label>
+                    Aantal hoofdsteden
+                </label>
+                <select ng-model="selectedOption" ng-options="keuze as keuze.tekst for keuze in spelCtrl.keuzes track by keuze.id"
+                    ng-change="spelCtrl.update(keuze)">
+                </select>
+            </div>
+        </form>
+            <div class="container-fluid col-xs-4 col-sm-4 col-md-4 col-lg-4 selectionContainer">
+                <h4 class="selectionHeading">Jouw eigen reeks!</h4>
+            <div class="container-circle">
+                <a ng-href="#/spelen/reeks/{{selectedOption.id}}">
+                    <div class="overlay"></div>
+                    <span>Starten!</span>
+                </a>
+            </div>
+            </div>
+            <div class="container-fluid col-xs-4 col-sm-4 col-md-4 col-lg-4 selectionContainer">
+                <h4 class="selectionHeading">De ultimate challenge!</h4>
+            <div style="background-color:#f48342;" class="container-circle">
+                <a ng-href="#/spelen/reeks/47">
+                    <div class="overlay"></div>
+                    <span>De ultieme challenge</span>
+                </a>
+            </div>
+            </div>
+            <div class="container-fluid col-xs-4 col-sm-4 col-md-4 col-lg-4 selectionContainer">
+                <h4 class="selectionHeading">Ik heb geen tijd!</h4>
+            <div style="background-color:#42c5f4;" class="container-circle">
+                <a ng-href="#/spelen/reeks/10">
+                    <div class="overlay"></div>
+                    <span>SNELLER!</span>
+                </a>
+            </div>
+            </div>
+    </div>
+</div>
+</body>
+</html>

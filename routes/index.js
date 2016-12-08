@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-
+var jwt = require('express-jwt');
 var mongoose = require('mongoose');
 var Land = mongoose.model('Land');
 var Quiz = mongoose.model('Quiz');
@@ -16,18 +16,15 @@ router.get('/api', function(req, res) {
 
 // GET - landen (allemaal)
 router.get('/api/landen', function(req, res, next) {
-  Land.find(function(err,landen) {
+  Land.find({}).sort({land: 1}).exec(function(err,landen) {
     if(err) {
       return next(err);
     }
     console.log('Landen worden opgevraagd');
-    res.json(landen);
+    var rlanden = landen
+    console.log('Landen worden gesorteerd');
+    res.json(rlanden);
   })
-});
-
-// GET - landen (specifiek)
-router.get('/api/landen/:land', function(req,res) {
-  res.json(req.land);
 });
 
 // POST - land
@@ -41,15 +38,53 @@ router.post('/api/landen', function(req,res,next) {
   })
 });
 
-router.get('/api/quiz', function(req,res,next) {
-  Quiz.find(function(err,quizs) {
+// GET - reeks (een willekeurige reeks van hoofdsteden)
+
+router.get('/api/reeks/:id' , function(req,res) {
+  var landen = {};
+  landen = Land.find({},function(err,landen) {
     if(err) {
+      return next(err);
+    }
+
+    var limiter = req.params.id;
+    var responseArray = [];
+    var options = [];
+
+    while(responseArray.length < limiter) {
+      var randomCountry = Math.floor((Math.random() * landen.length));
+      responseArray.push(landen[randomCountry]);
+      landen.splice(randomCountry, 1);
+
+      while (options.length < 2) {
+        responseArray[responseArray.length - 1].options = {}
+        var randomCapitals = Math.floor((Math.random() * landen.length));
+        if(options.indexOf(landen[randomCapitals].hoofdstad) == -1) {
+          options.push(landen[randomCapitals].hoofdstad);
+        }
+      }
+      responseArray[responseArray.length - 1].options = options;
+      options = [];
+    }
+    res.json(responseArray);
+  });
+
+});
+
+// GET alle quizes - quiz
+
+router.get('/api/quiz/', function(req,res,next) {
+  Quiz.find({}, null,{sort:{'id': 1}} ,function(err,quizs) {
+    if(err) {
+      console.log(err)
       return next(err)
     }
     console.log('Quizes worden opgevraagd');
     res.json(quizs)
   })
 });
+
+// POST custom quiz // TODO nice to have
 
 router.post('/api/quiz', function(req,res, next) {
   var quiz = new Quiz(req.body);
@@ -61,11 +96,21 @@ router.post('/api/quiz', function(req,res, next) {
   })
 });
 
+// GET - specifieke quiz
+
+router.get('/api/quiz/:id', function(req,res) {
+  var searchID = req.id
+  Quiz.findOne({'id': searchID}, function(err, quiz) {
+    if(err) {console.log(err)};
+    res.json(quiz)
+  })
+});
+
 
 // User: nieuwe user (POST)
 
-router.post('/register', function(req,res,next) {
-  if(!req.body.username || req.body.password) {
+router.post('/api/registreer', function(req,res,next) {
+  if(!req.body.username || !req.body.password) {
     return res.status(400).json({message:'Gelieve alle velden in te vullen'});
   }
 
@@ -82,7 +127,7 @@ router.post('/register', function(req,res,next) {
 
 // User: bestaande user (login - POST)
 
-router.post('/login', function(req, res, next) {
+router.post('/api/login', function(req, res, next) {
   if(!req.body.username || !req.body.password) {
     return res.status(400).json({message: 'Gelieve alle velden in te vullen'});
   }
@@ -98,6 +143,10 @@ router.post('/login', function(req, res, next) {
     }
   })(req,res,next)
 });
+
+// Middleware voor auth
+
+var auth = jwt({secret: 'SECRET', userProperty:'payload'});
 
 // Configureren van Router POSTing
 
