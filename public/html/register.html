@@ -6,15 +6,18 @@
 </head>
 <body>
 <wrong-input ng-show="authCtrl.warning"/>
+<div ng-if="myForm.username.$touched && myForm.username.$error" class="alert alert-danger directiveWarning">
+    Gebruikersnaam is reeds bezet! <b>¯\_(ツ)_/¯ </b>
+</div>
 <div class="panel panel-default mainPanel">
     <div class="panel-heading">
         <h3 class="panel-title">Registratie nieuwe gebruiker</h3>
     </div>
     <div class="panel-body">
-        <form>
+        <form name="myForm">
             <div class="form-group">
                 <label for="username">Gebruikersnaam</label>
-                <input ng-model="user.username" type="text" class="form-control" id="username" placeholder="Gebruiker"/>
+                <input ng-model="user.username" name="username" type="text" class="form-control" id="username" placeholder="Gebruiker" ng-model-options="{ debounce: 1500 }" check-user-name-async/>
             </div>
             <div class="form-group">
                 <label for="password">Paswoord</label>

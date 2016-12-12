@@ -31,6 +31,26 @@
                 });
             return deferred.promise;
         };
+        
+        service.getGebruikerNamen = function() {
+            var deferred = $q.defer();
+            return $http.get(GLOBALS.usernamesUrl)
+                .success(function(data) {
+                    deferred.resolve(data);
+                });
+            return deferred.promise;
+        };
+
+        service.checkNaam = function(naam) {
+            var deferred = $q.defer();
+            var check = {};
+            check.naam = naam;
+            return $http.post(GLOBALS.usernamesUrl, check)
+                .success(function(data) {
+                    deferred.resolve(data);
+                });
+            return deferred.promise;
+        };
 
         return service;
     }

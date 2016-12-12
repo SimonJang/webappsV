@@ -131,6 +131,32 @@ router.post('/api/registreer', function(req,res,next) {
 
 });
 
+router.post('/api/names/', function(req,res,next) {
+  var sugnaam = req.body.naam;
+  User.findOne({username: sugnaam}, function(err, result) {
+    if(err) {
+      console.log("Er is iets verkeerd gegaan bij het opvragen van namen")
+      return next(err);
+    }
+    if(!result) {
+      return res.json({response: 'ok'})
+    }
+    if(result) {
+      return res.json({response: 'nok'})
+    }
+  })
+});
+
+router.get('/api/names/', function(req,res) {
+  User.find({}, {username: 1, _id: 0}, function(err, names) {
+    if(err) {
+      console/log(err)
+    }
+    console.log("Namen worden opgevraagd");
+    res.json(names);
+  })
+});
+
 // User: bestaande user (login - POST)
 
 router.post('/api/login', function(req, res, next) {
