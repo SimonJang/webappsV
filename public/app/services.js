@@ -31,6 +31,26 @@
                 });
             return deferred.promise;
         };
+        
+        service.getGebruikerNamen = function() {
+            var deferred = $q.defer();
+            return $http.get(GLOBALS.usernamesUrl)
+                .success(function(data) {
+                    deferred.resolve(data);
+                });
+            return deferred.promise;
+        };
+
+        service.checkNaam = function(naam) {
+            var deferred = $q.defer();
+            var check = {};
+            check.naam = naam;
+            return $http.post(GLOBALS.usernamesUrl, check)
+                .success(function(data) {
+                    deferred.resolve(data);
+                });
+            return deferred.promise;
+        };
 
         return service;
     }
@@ -56,9 +76,9 @@
         return service;
     }
 
-    reeksService.$inject = ['$http','$q'];
+    reeksService.$inject = ['$http','$q', 'authFactory'];
     
-    function reeksService($http, $q) {
+    function reeksService($http, $q, authFactory) {
         var service = {};
         service.temp = {};
         service.geefReeks = function(GLOBALS, grootte) {
@@ -73,38 +93,60 @@
             return deferred.promise;
         };
         
-        return service;
-    }
-
-    quizService.$inject = ['$http', '$q', 'GLOBALS'];
-
-    function quizService($http, $q, GLOBALS) {
-        var service = {};
-        service.temp = {};
-        
-        service.geefQuizes = function() {
+        service.updateScoreReeks = function(GLOBALS, score) {
             var deferred = $q.defer();
-            $http({
-                url: GLOBALS.quizUrl,
-                method: 'GET'
-            })
-                .success(function(data) {
-                    deferred.resolve(data)
-                });
-            return deferred.promise;
-        };
-
-        service.geefQuiz = function(id) {
-            $http({
-                url: GLOBALS.quizUrl + id,
-                method: 'GET'
-            })
+            var update = {};
+            update.score = score;
+            $http.post(GLOBALS.updateScoreURL + 'reeks', update, {headers: {Authorization: 'Bearer '+ authFactory.getToken()}})
                 .success(function(data) {
                     deferred.resolve(data);
                 });
             return deferred.promise;
         };
+        
+        return service;
+    }
 
+    quizService.$inject = ['$http', '$q', 'GLOBALS', 'authFactory'];
+
+    function quizService($http, $q, GLOBALS, authFactory) {
+        var service = {};
+        service.temp = {};
+
+        service.geefQuizes = function () {
+            var deferred = $q.defer();
+            $http({
+                url: GLOBALS.quizUrl,
+                method: 'GET'
+            })
+                .success(function (data) {
+                    deferred.resolve(data)
+                });
+            return deferred.promise;
+        };
+
+        service.geefQuiz = function (id) {
+            $http({
+                url: GLOBALS.quizUrl + id,
+                method: 'GET'
+            })
+                .success(function (data) {
+                    deferred.resolve(data);
+                });
+            return deferred.promise;
+        };
+
+        service.updateScoreQuiz = function (score) {
+            var deferred = $q.defer();
+            var update = {};
+            update.score = score;
+            $http.post(GLOBALS.updateScoreURL + 'quiz', update, {headers: {Authorization: 'Bearer '+ authFactory.getToken()}})
+                .success(function (data) {
+                    deferred.resolve(data);
+                });
+            return deferred.promise;
+        };
+        
         return service;
     }
 

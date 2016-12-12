@@ -144,6 +144,7 @@
                 else
                     $scope.uitslag.juist += 1;
             }
+            quizService.updateScoreQuiz($scope.uitslag.juist);
             $scope.showForm = false;
             $scope.showResult = true;
         };
@@ -224,8 +225,10 @@
                 else
                     $scope.uitslag.juist += 1;
             }
+            reeksService.updateScoreReeks(GLOBALS,$scope.uitslag.juist)
             $scope.showForm = false;
             $scope.showResult = true;
+            
         };
 
         vm.nieuwSpel = function() {
