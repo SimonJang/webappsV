@@ -12,6 +12,7 @@
             quizUrl: 'http://localhost:3000/api/quiz/',
             usernamesUrl: 'http://localhost:3000/api/names',
             userUrl: 'http://localhost:3000/api/user',
-            highscoreURL: 'http://localhost:3000/api/highscore'
+            highscoreURL: 'http://localhost:3000/api/highscore',
+            updateScoreURL: 'http://localhost:3000/api/score/'
         })
 })();

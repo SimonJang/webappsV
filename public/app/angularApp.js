@@ -81,25 +81,45 @@
                 url: '/spelen/reeks',
                 templateUrl: 'html/spelReeksConfig.html',
                 controller: 'spelController',
-                controllerAs: 'spelCtrl'
+                controllerAs: 'spelCtrl',
+                onEnter: ['$state', 'authFactory', function($state, authFactory) {
+                    if(!authFactory.isLoggedIn()) {
+                        $state.go('login');
+                    }
+                }]
             })
             .state('spelenReeksId', {
                 url: '/spelen/reeks/:id',
                 templateUrl: 'html/spel.html',
                 controller: 'reeksController',
-                controllerAs: 'reeksCtrl'
+                controllerAs: 'reeksCtrl',
+                onEnter: ['$state', 'authFactory', function($state, authFactory) {
+                    if(!authFactory.isLoggedIn()) {
+                        $state.go('login');
+                    }
+                }]
             })
             .state('spelenQuiz', {
                 url: '/spelen/quiz',
                 templateUrl: 'html/quizConfig.html',
                 controller: 'quizController',
-                controllerAs: 'quizCtrl'
+                controllerAs: 'quizCtrl',
+                onEnter: ['$state', 'authFactory', function($state, authFactory) {
+                    if(!authFactory.isLoggedIn()) {
+                        $state.go('login');
+                    }
+                }]
             })
             .state('SpelenQuizId', {
                 url:'/spelen/quiz/:id',
                 templateUrl: 'html/spel.html',
                 controller: 'quizController',
-                controllerAs: 'quizCtrl'
+                controllerAs: 'quizCtrl',
+                onEnter: ['$state', 'authFactory', function($state, authFactory) {
+                    if(!authFactory.isLoggedIn()) {
+                        $state.go('login');
+                    }
+                }]
             })
             .state('landen', {
                 url: '/landen',

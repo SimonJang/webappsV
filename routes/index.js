@@ -105,7 +105,7 @@ router.post('/api/quiz', function(req,res, next) {
 // GET - specifieke quiz
 
 router.get('/api/quiz/:id', function(req,res) {
-  var searchID = req.id
+  var searchID = req.id;
   Quiz.findOne({'id': searchID}, function(err, quiz) {
     if(err) {console.log(err)};
     res.json(quiz)
@@ -174,6 +174,30 @@ router.post('/api/login', function(req, res, next) {
       return res.status(401).json(info);
     }
   })(req,res,next)
+});
+
+router.post('/api/score/reeks', auth, function(req,res,next) {
+  var user = req.payload.username;
+  var extra = req.body.score;
+  User.update({username: user}, {$inc: { aantalGespeeldR: 1, score: extra}}, function(err, user) {
+    if(err){
+      console.log(err);
+      return next(err);
+    }
+    res.json({status: "ok"});
+  });
+});
+
+router.post('/api/score/quiz', auth, function(req,res,next) {
+  var user = req.payload.username;
+  var extra = req.body.score;
+  User.update({username: user}, {$inc: { aantalGespeeldQ: 1, score: extra}}, function(err, user) {
+    if(err){
+      console.log(err);
+      return next(err);
+    }
+    res.json({status: "ok"});
+  });
 });
 
 router.post('/api/user/',auth, function(req,res,next) {
