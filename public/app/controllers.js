@@ -6,6 +6,8 @@
     angular
         .module('quizApp')
         .controller('homeController', homeController)
+        .controller('profielController', profielController)
+        .controller('scoreController', scoreController)
         .controller('quizController', quizController)
         .controller('navController', navController)
         .controller('authController', authController)
@@ -56,10 +58,18 @@
         $scope.logOut = authFactory.logOut;
     }
     
-    homeController.$inject = ['$scope', '$state'];
+    homeController.$inject = ['$scope', '$state', 'authFactory'];
 
-    function homeController($scope, $state) {
+    function homeController($scope, $state, authFactory) {
         var vm = this;
+
+        vm.toScore = function() {
+            $state.go('scorebord')
+        }
+
+        vm.toProfiel = function() {
+            $state.go('profiel');
+        }
 
         vm.onSpelen = function() {
             $state.go('spelen');
@@ -228,4 +238,34 @@
             $location.path('/spelen/');
         }
     }
+
+    scoreController.$inject = ['$scope', 'gebruikerService'];
+
+    function scoreController($scope, gebruikerService) {
+        var vm = this;
+        gebruikerService.getHighScores()
+            .then(function(scores,err) {
+                if(err) {
+                    console.log(err);
+                }
+                $scope.scores = scores.data;
+            })
+    }
+
+    profielController.$inject = ['$scope', 'gebruikerService', 'authFactory'];
+
+    function profielController($scope, gebruikerService, authFactory) {
+        var vm = this;
+        gebruikerService.getGebruiker()
+            .then(function(user,err) {
+            if(err) {
+                console.log(err)
+            }
+            $scope.user = authFactory.currentUser();
+            $scope.playedQ = user.data.aantalGespeeldQ;
+            $scope.playedR = user.data.aantalGespeeldR;
+            $scope.score = user.data.score;
+        });
+    }
+
 })();

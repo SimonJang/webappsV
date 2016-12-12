@@ -9,6 +9,8 @@
             reeksURL: 'http://localhost:3000/api/reeks/',
             loginUrl: 'http://localhost:3000/api/login',
             registreerUrl: 'http://localhost:3000/api/registreer',
-            quizUrl: 'http://localhost:3000/api/quiz/'
+            quizUrl: 'http://localhost:3000/api/quiz/',
+            userUrl: 'http://localhost:3000/api/user/',
+            highscoreURL: 'http://localhost:3000/api/highscore'
         })
 })();

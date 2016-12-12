@@ -43,6 +43,28 @@
                     }
                 }]
             })
+            .state('profiel', {
+                url: '/profiel',
+                templateUrl: 'html/profiel.html',
+                controller: 'profielController',
+                controllerAs: 'profielCtrl',
+                onEnter: ['$state', 'authFactory', function($state, authFactory) {
+                    if(!authFactory.isLoggedIn()) {
+                        $state.go('login');
+                    }
+                }]
+            })
+            .state('scorebord', {
+                url: '/scorebord',
+                templateUrl: 'html/score.html',
+                controller: 'scoreController',
+                controllerAs: 'scoreCtrl',
+                onEnter:['$state', 'authFactory', function($state, authFactory) {
+                    if(!authFactory.isLoggedIn()) {
+                        $state.go('login');
+                    }
+                }]
+            })
             .state('contact', {
                 url: '/contact',
                 templateUrl: 'html/contactView.html',

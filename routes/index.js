@@ -7,6 +7,11 @@ var Land = mongoose.model('Land');
 var Quiz = mongoose.model('Quiz');
 var User = mongoose.model('User');
 
+// Middleware voor auth
+// Zodat de requests kunnen worden gecontroleerd
+
+var auth = jwt({secret: 'SECRET', userProperty:'payload'});
+
 // REST routes worden hier gedefinieerd
 
 // Uitleg REST service
@@ -28,6 +33,7 @@ router.get('/api/landen', function(req, res, next) {
 });
 
 // POST - land
+// Wordt momenteel niet gebruikt
 router.post('/api/landen', function(req,res,next) {
   var land = new Land(req.body);
   land.save(function(err,land) {
@@ -144,9 +150,31 @@ router.post('/api/login', function(req, res, next) {
   })(req,res,next)
 });
 
-// Middleware voor auth
+router.post('/api/user/',auth, function(req,res,next) {
+  var user = req.payload.username;
+  User.findOne({'username': user}, {score: 1, aantalGespeeldQ: 1, aantalGespeeldR: 1}, function(err, user) {
+    if(err) {
+      console.log(err);
+      return next(err)
+    }
+    console.log('Gebruikers info wordt opgevraagd');
+    res.json(user)
+  })
+});
 
-var auth = jwt({secret: 'SECRET', userProperty:'payload'});
+router.post('/api/highscore/', auth, function(req,res,next) {
+  User.find({}, {username : 1, score: 1})
+      .sort({score: 1})
+      .limit(10)
+      .exec(function(err, scores) {
+        if(err) {
+          console.log(err);
+          return next(err);
+        }
+        console.log('Highscore wordt opgevraagd');
+        res.json(scores)
+  })
+});
 
 // Configureren van Router POSTing
 
