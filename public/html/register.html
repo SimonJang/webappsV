@@ -6,10 +6,12 @@
 </head>
 <body>
 <wrong-input ng-show="authCtrl.warning"/>
+
 <div ng-show="authCtrl.emptyWarning" class="alert alert-danger directiveWarning fade-in-out">
     Gebruikersnaam en paswoord moeten ingevuld zijn!
 </div>
 <div ng-show="myForm.username.$touched && myForm.username.$error" class="alert alert-danger directiveWarning fade-in-out">
+<div ng-if="myForm.username.$touched && myForm.username.$error" class="alert alert-danger directiveWarning">
     Gebruikersnaam is reeds bezet! <b>¯\_(ツ)_/¯ </b>
 </div>
 <div class="panel panel-default mainPanel">
@@ -21,10 +23,11 @@
             <div class="form-group">
                 <label for="username">Gebruikersnaam</label>
                 <input ng-model="user.username" name="username" type="text" class="form-control" id="username" placeholder="Gebruiker" ng-model-options="{ updateOn: 'blur' }" check-user-name-async/>
+                <input required ng-model="user.username" name="username" type="text" class="form-control" id="username" placeholder="Gebruiker" ng-model-options="{ updateOn: 'blur' }" check-user-name-async/>
             </div>
             <div class="form-group">
                 <label for="password">Paswoord</label>
-                <input ng-model="user.password" type="password" class="form-control" id="password" placeholder="Paswoord">
+                <input required ng-model="user.password" type="password" class="form-control" id="password" placeholder="Paswoord">
             </div>
             <div class="btnContainer">
             <button type="button" class="btn btn-primary" ng-click="register()">Registreer</button>
