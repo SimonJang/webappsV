@@ -21,32 +21,53 @@
         var vm = this;
         $scope.user = {};
         vm.warning = false;
+        vm.emptyWarning = false;
+        $scope.error = false;
 
         $scope.register = function() {
-            var letterNumbersOnly = /^[0-9a-zA-Z]+$/;
-            var flagUser = $scope.user.username.match(letterNumbersOnly);
-            var flagPass = $scope.user.password.match(letterNumbersOnly);
-            if(flagUser && flagPass) {
-                authFactory.register($scope.user).error(function(error) {
-                    $scope.error = true;
-                }).then(function() {
-                    $state.go('home');
-                });
+            if($scope.user.username == "" || typeof $scope.user.username == "undefined") {
+                vm.emptyWarning = true;
+            }
+            else if($scope.user.password == "" || typeof $scope.user.password == "undefined") {
+                vm.emptyWarning = true;
             }
             else {
-                $scope.user.username = null;
-                $scope.user.password = null;
-                vm.warning = true;
+                var letterNumbersOnly = /^[0-9a-zA-Z]+$/;
+                var flagUser = $scope.user.username.match(letterNumbersOnly);
+                var flagPass = $scope.user.password.match(letterNumbersOnly);
+                if(flagUser && flagPass) {
+                    authFactory.register($scope.user).error(function(error) {
+                        $scope.error = true;
+                    }).then(function() {
+                        $state.go('home');
+                    });
+                }
+                else {
+                    $scope.user.username = "";
+                    $scope.user.password = "";
+                    vm.warning = true;
+                }
             }
-
         };
 
         $scope.logIn = function() {
-            authFactory.logIn($scope.user).error(function(error) {
-                $scope.error = true;
-            }).then(function() {
-                $state.go('home');
-            })
+            if($scope.user.username == "" || typeof $scope.user.username == "undefined") {
+                vm.emptyWarning = true;
+            }
+            else if($scope.user.password == "" || typeof $scope.user.password == "undefined") {
+                vm.emptyWarning = true;
+            }
+            else if($scope.user.username && $scope.user.password) {
+                vm.emptyWarning = false;
+                authFactory.logIn($scope.user).error(function(error) {
+                    $scope.error = true;
+                }).then(function() {
+                    $state.go('home');
+                })
+            }
+            else {
+                vm.emptyWarning = true;
+            }
         }
     }
 

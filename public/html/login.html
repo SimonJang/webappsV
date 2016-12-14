@@ -5,6 +5,12 @@
     <title>Login pagina</title>
 </head>
 <body>
+<div ng-if="authCtrl.warning.isEmpty" class="alert alert-danger">
+    Gebruikersnaam en paswoord moeten ingevuld zijn!
+</div>
+<div ng-if="error">
+    Verkeerde gebruikersnaam en/of paswoord!
+</div>
 <div class="panel panel-default mainPanel">
     <div class="panel-heading">
         <h3 class="panel-title">Log in</h3>

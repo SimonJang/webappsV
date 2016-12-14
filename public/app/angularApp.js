@@ -3,7 +3,7 @@
  */
 
 (function () {
-    angular.module('quizApp', ['ui.router']).config(moduleConfig);
+    angular.module('quizApp', ['ui.router','ngAnimate']).config(moduleConfig);
 
     moduleConfig.$inject = ['$stateProvider','$urlRouterProvider'];
 
