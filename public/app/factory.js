@@ -7,9 +7,9 @@
     angular.module('quizApp')
         .factory('authFactory', authFactory);
 
-    authFactory.$inject = ['$http', '$window', 'GLOBALS'];
+    authFactory.$inject = ['$http', '$window', 'GLOBALS','$state'];
 
-    function authFactory($http, $window, GLOBALS) {
+    function authFactory($http, $window, GLOBALS, $state) {
         var auth = {};
 
         auth.saveToken = function(token) {
@@ -56,6 +56,7 @@
 
         auth.logOut = function() {
             $window.localStorage.removeItem('quizapptoken');
+            $state.go('home');
         };
 
         return auth;
