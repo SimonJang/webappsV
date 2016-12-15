@@ -40,7 +40,7 @@ app.use(cookieParser());
 app.use('/', routes);
 
 // Serveren van static HTML en geen view templates
-
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(express.static(__dirname + '/public'));
 
 // Initialiseren van passport
