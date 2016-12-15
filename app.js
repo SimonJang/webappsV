@@ -18,7 +18,7 @@ require('./models/user');
 
 require('./config/passport');
 
-mongoose.connect('mongodb://localhost/quizapp', function() {
+mongoose.connect('mongodb://heroku_mh5ts9mq:eqph0b1q4tg1gq5gnu3vk6hhmb@ds135818.mlab.com:35818/heroku_mh5ts9mq', function() {
   console.log('Mongoose connected. DB connection open');
 });
 

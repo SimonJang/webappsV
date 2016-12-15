@@ -5,14 +5,14 @@
 (function() {
     angular.module('quizApp')
         .constant('GLOBALS', {
-            alleLandenURL: 'http://localhost:3000/api/landen',
-            reeksURL: 'http://localhost:3000/api/reeks/',
-            loginUrl: 'http://localhost:3000/api/login',
-            registreerUrl: 'http://localhost:3000/api/registreer',
-            quizUrl: 'http://localhost:3000/api/quiz/',
-            usernamesUrl: 'http://localhost:3000/api/names',
-            userUrl: 'http://localhost:3000/api/user',
-            highscoreURL: 'http://localhost:3000/api/highscore',
-            updateScoreURL: 'http://localhost:3000/api/score/'
+            alleLandenURL: 'https://landenquizapp.herokuapp.com/api/landen',
+            reeksURL: 'https://landenquizapp.herokuapp.com/api/reeks/',
+            loginUrl: 'https://landenquizapp.herokuapp.com/api/login',
+            registreerUrl: 'https://landenquizapp.herokuapp.com/api/registreer',
+            quizUrl: 'https://landenquizapp.herokuapp.com/api/quiz/',
+            usernamesUrl: 'https://landenquizapp.herokuapp.com/api/names',
+            userUrl: 'https://landenquizapp.herokuapp.com/api/user',
+            highscoreURL: 'https://landenquizapp.herokuapp.com/api/highscore',
+            updateScoreURL: 'https://landenquizapp.herokuapp.com/api/score/'
         })
 })();
